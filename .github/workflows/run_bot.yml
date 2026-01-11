@@ -19,7 +19,6 @@ jobs:
           python-version: '3.9'
 
       - name: Install libraries
-        # CHÚ Ý DÒNG NÀY ĐÃ ĐỔI THƯ VIỆN AI
         run: pip install requests beautifulsoup4 python-dotenv google-genai
 
       - name: Run script
