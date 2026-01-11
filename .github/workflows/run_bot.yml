@@ -2,8 +2,8 @@ name: Bot San Hang
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # Chạy mỗi 30 phút (Bạn có thể sửa thành 15 hoặc 60)
-  workflow_dispatch: # Cho phép bấm nút chạy thủ công để test
+    - cron: '*/30 * * * *
+  workflow_dispatch:
 
 jobs:
   run-crawler:
@@ -19,15 +19,17 @@ jobs:
         python-version: '3.9'
 
     - name: Install libraries
-      run: pip install requests beautifulsoup4
+      # THÊM google-generativeai VÀO DÒNG DƯỚI ĐÂY
+      run: pip install requests beautifulsoup4 python-dotenv google-generativeai
 
     - name: Run script
-      env: # Lấy bí mật nạp vào biến môi trường
+      env:
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
       run: python crawl.py
 
-    - name: Commit and Push Data # Bước này để lưu file csv cập nhật lại GitHub
+    - name: Commit and Push Data
       run: |
         git config --global user.name 'Bot San Hang'
         git config --global user.email 'bot@noreply.github.com'
