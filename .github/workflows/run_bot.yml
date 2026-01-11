@@ -19,7 +19,8 @@ jobs:
           python-version: '3.9'
 
       - name: Install libraries
-        run: pip install requests beautifulsoup4 python-dotenv google-generativeai
+        # CHÚ Ý DÒNG NÀY ĐÃ ĐỔI THƯ VIỆN AI
+        run: pip install requests beautifulsoup4 python-dotenv google-genai
 
       - name: Run script
         env:
@@ -32,6 +33,6 @@ jobs:
         run: |
           git config --global user.name 'Bot San Hang'
           git config --global user.email 'bot@noreply.github.com'
-          git add danh_sach_san_pham.csv
-          git commit -m "Update data" || exit 0
+          git add product_list.csv
+          git commit -m "Update product data" || exit 0
           git push
