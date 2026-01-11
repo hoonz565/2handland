@@ -2,7 +2,7 @@ name: Bot San Hang
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,29 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
 
-    - name: Install libraries
-      # THÊM google-generativeai VÀO DÒNG DƯỚI ĐÂY
-      run: pip install requests beautifulsoup4 python-dotenv google-generativeai
+      - name: Install libraries
+        run: pip install requests beautifulsoup4 python-dotenv google-generativeai
 
-    - name: Run script
-      env:
-        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
-      run: python crawl.py
+      - name: Run script
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python crawl.py
 
-    - name: Commit and Push Data
-      run: |
-        git config --global user.name 'Bot San Hang'
-        git config --global user.email 'bot@noreply.github.com'
-        git add danh_sach_san_pham.csv
-        git commit -m "Update data" || exit 0
-        git push
+      - name: Commit and Push Data
+        run: |
+          git config --global user.name 'Bot San Hang'
+          git config --global user.email 'bot@noreply.github.com'
+          git add danh_sach_san_pham.csv
+          git commit -m "Update data" || exit 0
+          git push
